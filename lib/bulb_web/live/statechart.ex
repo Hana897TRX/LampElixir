@@ -16,4 +16,20 @@ defmodule BulbWeb.Statechart do
     GenServer.cast(ui, :switch_off)
     {:noreply, %{state | st: Off}}
   end
+
+  def handle_cast(:alarm, %{ui_pid: ui, st: Off} = state) do
+    GenServer.cast(ui, :switch_on)
+    timer = Process.send_after(self(), :alarm_On_to_alarm_Off, 1000)
+    {:noreply, %{state | st: AlarmOn}}
+  end
+
+  def handle_cast(:alarm, %{ui_pid: ui, st: AlarmOn} = state) do
+    GenServer.cast(ui, :switch_off)
+    {:noreply, %{state | st: Off}}
+  end
+
+  def handle_info(:alarm_On_to_alarm_Off, %{ui_pid: ui, st: AlarmOn} = state) do
+    GenServer.cast(ui, :switch_off)
+    {:noreply, %{state | st: AlarmOff}}
+  end
 end
