@@ -7,14 +7,14 @@ defmodule BulbWeb.Statechart do
     {:ok, %{ui_pid: ui, st: Off}}
   end
 
-  def handle_cast(:switch, %{ui_pid: ui, st: Off} = state) do
-    GenServer.cast(ui, :switch_on)
-    {:noreply, %{state | st: On}}
-  end
-
-  def handle_cast(:switch, %{ui_pid: ui, st: On} = state) do
-    GenServer.cast(ui, :switch_off)
-    {:noreply, %{state | st: Off}}
+  def handle_cast(:switch, %{ui_pid: ui, st: down} = state) do
+    if(state[:st] == Off) do
+      GenServer.cast(ui, :switch_on)
+      {:noreply, %{state | st: On}}
+    else
+      GenServer.cast(ui, :switch_off)
+      {:noreply, %{state | st: Off}}
+    end
   end
 
   def handle_cast(:alarm, %{ui_pid: ui, st: Off} = state) do

@@ -7,7 +7,7 @@ defmodule BulbWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_bulb_key",
-    signing_salt: "iZARGmwB"
+    signing_salt: "SODOpC4q"
   ]
 
   socket "/socket", BulbWeb.UserSocket,

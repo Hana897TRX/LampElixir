@@ -10,10 +10,10 @@ use Mix.Config
 # Configures the endpoint
 config :bulb, BulbWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "5QfoVNwjUh6+1mC0lEymQmjXSuTF5qtnQfjtEUrbmCjzuoO/N9R1BVyeJo6YXHFf",
+  secret_key_base: "lmf6KDcp64HR1TfJM9fmbTDtqZGKkPDetuVjXGzI3fmO41jEOhThgBs8hANktdga",
   render_errors: [view: BulbWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Bulb.PubSub,
-  live_view: [signing_salt: "E+2YPHtU"]
+  live_view: [signing_salt: "n90z2/Nk"]
 
 # Configures Elixir's Logger
 config :logger, :console,
